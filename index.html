@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>test</title>
+	<script src="/socket.io/socket.io.js"></script>
+<script type="text/javascript">
+	function fick_clear(){
+		var s=document.getElementById('text').innerHTML='';
+		console.log(s);
+		
+	}
+	function test(){
+		socket.emit('my other event', { my: 'hahah' })
+		console.log("data");
+	}
+
+	var socket = io('http://219.246.184.153:8086');
+  socket.on('news', function (data) {
+    console.log(data);
+    var p=document.getElementById('text');
+    p.innerHTML=p.innerHTML+data+"\n"
+    socket.emit('my other event', { my: 'mydata' });
+  });
+</script>
+<style type="text/css">
+#warp{
+	width:500px;
+	margin:0 auto;
+  	position: absolute;
+  	top: 0; left: 0; bottom: 0; right: 0;
+}
+</style>
+</head>
+<body>
+	<div id="warp">
+		<div>
+			<h1>Sensor Data</h1>
+		</div>
+		<div>
+			<textarea id='text' readonly="true" name="content"  rows="20"  cols="60" ></textarea>
+			<input type='button' value="clear" onclick="fick_clear();">
+		</input>
+		</div>
+	</div>
+</body>
+
+</html>
